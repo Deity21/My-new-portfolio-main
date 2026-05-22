@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="contact.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("r1a51ONa7E564q-_J"); // replace with your EmailJS public key
+    })();
+  </script>
+  
+  <style>
+body {
+  font-family: 'Arial', sans-serif;
+  background: #fff;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+.contact-wrapper {
+  max-width: 650px;
+  width: 100%;
+  text-align: center;
+}
+
+.header img.avatar {
+  width: 85px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.fast {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #222;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.header h1 .highlight {
+  background: linear-gradient(90deg, #000dff, #5900ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtext {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+form {
+  margin-top: 20px;
+}
+
+.form-group,
+.form-row {
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 16px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #f5f5f7;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.15);
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+textarea {
+  min-height: 130px;
+  resize: none;
+}
+
+.budget {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.budget label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.budget-options {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.budget-options input {
+  display: none;
+}
+
+.budget-options label {
+  padding: 12px 24px;
+  border-radius: 25px;
+  background: #f5f5f7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.budget-options input:checked + label {
+  background: linear-gradient(90deg, #000dff, #5900ff);
+  color: #fff;
+}
+
+/* Submit button */
+.submit-btn {
+  background: linear-gradient(90deg, #000dff, #5900ff);
+  border: none;
+  padding: 16px 40px;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.3s ease;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Alert styles */
+.alert {
+  position: fixed;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 320px;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  z-index: 9999;
+  text-align: center;
+  transition: top 0.4s ease, opacity 0.4s ease;
+}
+
+.alert.show {
+  display: block;
+  top: 20px;
+  opacity: 1;
+}
+
+.alert.success {
+  border-left: 6px solid #28a745;
+  color: #155724;
+}
+
+.alert.error {
+  border-left: 6px solid #dc3545;
+  color: #721c24;
+}
+
+
+.submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.footer-note {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+  </style>
+</head>
+<body>
+  <div class="contact-wrapper">
+    <div class="header">
+      <img src="https://cdn.prod.website-files.com/5d27763c46ba9e561dc5b972/6602e3dbb6f2ddc9adfdf649_Group%201171277131.png" alt="team" class="avatar">
+      <p class="fast">Need a reply fast? 🔥</p>
+      <h1>Let's <span class="highlight">talk!</span></h1>
+      <p class="subtext">Share your project requirements here or send us an email at <b>Phenomspace@gmail.com</b><br> we will follow up in <b>24 hrs</b></p>
+    </div>
+
+    <form id="contact-form">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Name & Company" required>
+      </div>
+      <div class="form-row">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Project Description" required></textarea>
+      </div>
+
+      <div class="budget">
+        <label>Project Budget</label>
+        <div class="budget-options">
+          <input type="radio" id="b1" name="budget" value="$5K - $25K" required><label for="b1">$5K - $25K</label>
+          <input type="radio" id="b2" name="budget" value="$25K - $50K"><label for="b2">$25K - $50K</label>
+          <input type="radio" id="b3" name="budget" value="$50K - $100K"><label for="b3">$50K - $100K</label>
+          <input type="radio" id="b4" name="budget" value="$100K+"><label for="b4">$100K+</label>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">CONTINUE ➜</button>
+      <p class="footer-note">⭐ Join 100+ happy customers</p>
+    </form>
+  </div>
+
+  <!-- Alert container -->
+    <div id="alert-box" class="alert"></div>
+
+
+  <script src="contact.js"></script>
+  <script>
+    const form = document.getElementById("contact-form");
+const btn = document.querySelector(".submit-btn");
+const alertBox = document.getElementById("alert-box");
+
+function showAlert(message, type) {
+  alertBox.textContent = message;
+  alertBox.className = `alert ${type} show`;
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 4000); // auto-hide after 4s
+}
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  // Change button state
+  btn.textContent = "SENDING...";
+  btn.disabled = true;
+
+  const templateParams = {
+    Name: this.name.value,
+    Email: this.email.value,
+    Phone: this.phone.value,
+    Budget: this.budget.value,
+    Messag: this.message.value
+  };
+
+  emailjs.send("service_d9rw1md", "template_oz1o818", templateParams)
+    .then(function(response) {
+       showAlert("✅ Your message has been sent successfully!", "success");
+       form.reset();
+    }, function(error) {
+       showAlert("❌ Failed to send. Please try again later.", "error");
+    })
+    .finally(() => {
+      btn.textContent = "CONTINUE ➜";
+      btn.disabled = false;
+    });
+});
+
+
+
+  </script>
+</body>
+</html>
